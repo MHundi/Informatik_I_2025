@@ -42,6 +42,7 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
+\usepackage[top=3cm, bottom=2cm, left=4cm, right=2cm]{geometry}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 % Make \paragraph and \subparagraph free-standing
@@ -139,22 +140,6 @@
 \usepackage[document]{ragged2e}
 \KOMAoption{captions}{tableheading}
 \makeatletter
-\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
-\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
-\definecolor{quarto-callout-color}{HTML}{909090}
-\definecolor{quarto-callout-note-color}{HTML}{0758E5}
-\definecolor{quarto-callout-important-color}{HTML}{CC1914}
-\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
-\definecolor{quarto-callout-tip-color}{HTML}{00A047}
-\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
-\definecolor{quarto-callout-color-frame}{HTML}{acacac}
-\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
-\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
-\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
-\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
-\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
-\makeatother
-\makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
 \ifdefined\contentsname
@@ -201,7 +186,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={2 Hello World Python},
+  pdftitle={2. Hello World Python},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -210,7 +195,7 @@
   pdfcreator={LaTeX via pandoc}}
 
 
-\title{2 Hello World Python}
+\title{2. Hello World Python}
 \author{}
 \date{}
 
@@ -218,7 +203,7 @@
 \maketitle
 
 
-\subsubsection{2.1 Kurze Geschichte der
+\subsection{2.1 Kurze Geschichte der
 Programmiersprachen}\label{kurze-geschichte-der-programmiersprachen}
 
 \begin{enumerate}
@@ -271,7 +256,8 @@ der Klasse der imperativen Sprachen zugeordnet werden. Die vier
 Sprachklassen kennzeichnen daher eher einen gewissen Programmier-Stil
 und weniger die Ausdrucksfähigkeit einer bestimmten Sprache.
 
-2.2 Kurze Geschiche von Python
+\subsection{2.2 Kurze Geschiche von
+Python}\label{kurze-geschiche-von-python}
 
 \begin{itemize}
 \tightlist
@@ -321,7 +307,7 @@ und weniger die Ausdrucksfähigkeit einer bestimmten Sprache.
   \end{itemize}
 \end{itemize}
 
-\subsubsection{2.3 Eigenschaften von
+\subsection{2.3 Eigenschaften von
 Python}\label{eigenschaften-von-python}
 
 \textbf{Allgemein}
@@ -354,7 +340,7 @@ Verarbeiten des Programms bestimmt.
 \(\Rightarrow\) Python ist eine Mehrparadigmen-Programmiersprache, die
 verschiedene Programmieransätze unterstützt.
 
-\subsubsection{2.4 Der Python-Interpreter}\label{der-python-interpreter}
+\subsection{2.4 Der Python-Interpreter}\label{der-python-interpreter}
 
 \textbf{Compilierte Sprachen vs interpretierte Sprache}
 
@@ -392,292 +378,20 @@ Aufruf des Python-Interpreters:
 \end{Highlighting}
 \end{Shaded}
 
-\subsubsection{\texorpdfstring{2.5 Ganze Zahlen -
-\texttt{int}}{2.5 Ganze Zahlen - int}}\label{ganze-zahlen---int}
-
-Die ganzen Zahlen haben in Python den Datentyp int (=interger =
-ganzzahlig)
-
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
-\DecValTok{2}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Hello World"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-2
+Hello World
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[numbers=left,,]
-\DecValTok{2}\OperatorTok{+}\DecValTok{3}
-\end{Highlighting}
-\end{Shaded}
+\subsection{2.5 Skripte in Python}\label{skripte-in-python}
 
-\begin{verbatim}
-5
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[numbers=left,,]
-\DecValTok{5}\OperatorTok{{-}}\DecValTok{13}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
--8
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[numbers=left,,]
-\DecValTok{12}\OperatorTok{*}\DecValTok{324}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-3888
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[numbers=left,,]
-\DecValTok{2}\OperatorTok{*}\FloatTok{3.14}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-6.28
-\end{verbatim}
-
-\subsubsection{2.6 Realisierung der Ganzzahlwerte im Speicher -
-Zwei-Komplementdarstellung}\label{realisierung-der-ganzzahlwerte-im-speicher---zwei-komplementdarstellung}
-
-Zur rechnerinternen Darstellung ganzer Zahlen im 1Bit-Speicher wird
-häufig die sogenannte \textbf{2-Komplementdarstellung} verwendet.
-
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, opacityback=0, colframe=quarto-callout-note-color-frame, arc=.35mm, colback=white, bottomrule=.15mm, breakable, rightrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Definition}, titlerule=0mm, toptitle=1mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, toprule=.15mm]
-
-Ein \textbf{Bit} (=binary digit)ist die kleinste mögliche
-Informationseinheit. Mögliche Werte für ein Bit sind 0 oder 1. Dies
-entspricht dem Computerzustand Strom an oder Strom aus. In der logischen
-Interpretation wäre falsch = 0 und wahr = -1.
-
-\end{tcolorbox}
-
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, opacityback=0, colframe=quarto-callout-note-color-frame, arc=.35mm, colback=white, bottomrule=.15mm, breakable, rightrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Definition}, titlerule=0mm, toptitle=1mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, toprule=.15mm]
-
-Der Wert einer Zahl \(a=a_n a_{n-1} ... a_0\) mit \(n\) Bits in
-\textbf{2-Komplementdarstellung} ist definiert als:
-
-\[\text{Wert}(a) =  -a_n·2^{n}+\sum_{i=0}^{n--1} a_i·2^i\]
-
-\end{tcolorbox}
-
-\textbf{Beispiel: 3-Bit 2-Komplementdarstellung \((n = 3)\)}
-
-\(\text{Wert}(101) = -0\cdot 2^3 + 1 \cdot 2^2 + 0 \cdot 2^1 = 2\)
-
-\begin{longtable}[]{@{}
-  >{\centering\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4937}}
-  >{\centering\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5063}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\centering
-Wert in 3-Bit 2-Komplementdarstellung
-\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
-Wert in Vorzeichen-/Betragsdarstellung
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-000 & 0 \\
-001 & 1 \\
-010 & 2 \\
-011 & 3 \\
-100 & -4 \\
-101 & -3 \\
-110 & -2 \\
-111 & -1 \\
-\end{longtable}
-
-\textbf{Vorteile}
-
-Vorteilhaft bei dieser Art der Darstellung ist: - Es gibt \textbf{nur
-eine Darstellung der Zahl 0}. - Die \textbf{Subtraktion zweier Zahlen}
-lässt sich einfach auf eine \textbf{Addition} zurückführen.
-
-\begin{Shaded}
-\begin{Highlighting}[numbers=left,,]
-\DecValTok{8}\OperatorTok{/}\DecValTok{4}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-2.0
-\end{verbatim}
-
-\subsubsection{\texorpdfstring{2.7 Kommazahlen -
-\texttt{float}}{2.7 Kommazahlen - float}}\label{kommazahlen---float}
-
-Es gibt auch Kommawerte (z.B. 2.0). Diese Zahlen habe den Datentyp
-\texttt{float} Die Datentypen sind nicht begrenzt.
-
-\begin{Shaded}
-\begin{Highlighting}[numbers=left,,]
-\DecValTok{5}\OperatorTok{/}\DecValTok{4}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-1.25
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[numbers=left,,]
-\DecValTok{7}\OperatorTok{/}\DecValTok{3}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-2.3333333333333335
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[numbers=left,,]
-\FloatTok{1.2} \OperatorTok{+}\FloatTok{3.34}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-4.54
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[numbers=left,,]
-\OperatorTok{{-}}\FloatTok{3.45} \OperatorTok{{-}} \FloatTok{7.4}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
--10.850000000000001
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[numbers=left,,]
-\FloatTok{4.6}\OperatorTok{/}\FloatTok{4.3}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-1.069767441860465
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[numbers=left,,]
-\OperatorTok{{-}}\FloatTok{2.3}\OperatorTok{*{-}}\FloatTok{3.6}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-8.28
-\end{verbatim}
-
-\subsubsection{2.8 Realisierung von Fließkommawerten im Speicher -
-Gleitkommadarstellung}\label{realisierung-von-flieuxdfkommawerten-im-speicher---gleitkommadarstellung}
-
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, opacityback=0, colframe=quarto-callout-note-color-frame, arc=.35mm, colback=white, bottomrule=.15mm, breakable, rightrule=.15mm, colbacktitle=quarto-callout-note-color!10!white, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Definition}, titlerule=0mm, toptitle=1mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, toprule=.15mm]
-
-Eine reelle (eigentlich: rationale) Zahl wird im 1Bit-Speicher
-dargestellt durch die sogenannte \textbf{Gleitkommadarstellung}:
-
-\[z = m \cdot b^e\]
-
-mit - \(m\): Mantisse - \(b\): Basis - \(e\): Exponent (zur Basis b)
-
-In der Praxis wählt man für \(b\) meistens eine der Zahlen 2, 10, 16 und
-stellt dementsprechend die Zahl \(m\) als Ziffernfolge im Dual-,
-Dezimal-, oder Hexadezimalsystem dar.
-
-\end{tcolorbox}
-
-Der IEEE 754-Standard für eine Zahl \(z\) in Gleitkommadarstellung legt
-die Größe der einzelnen Komponenten dieser Darstellung fest und hat
-folgendes Format (das erste Bit ist hierbei das Vorzeichen der Mantisse
-\(m\)):
-
-32-Bit-IEEE 754-Gleitkommazahlen:
-
-\includegraphics[width=3.125in,height=\textheight,keepaspectratio]{images/floatdarstellung.jpg}
-
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, opacityback=0, colframe=quarto-callout-tip-color-frame, arc=.35mm, colback=white, bottomrule=.15mm, breakable, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{INFO}, titlerule=0mm, toptitle=1mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, toprule=.15mm]
-
-IEEE ist die Abkürzung für ``\textbf{I}nstitute of \textbf{E}lectrical
-and \textbf{E}lectronics \textbf{Engineers}'', eine Organisation, die
-Standards für verschiedene Technologien entwickelt und pflegt.
-
-\end{tcolorbox}
-
-Bei der Darstellung der Zahlen im Rechner reserviert man einen festen
-Teil einer Folge von Speicherzellen (1-Bit Speichern) für die Mantisse
-und den Rest für den Exponenten (den Wert von \(b\) braucht man nicht zu
-speichern, da alle Rechnungen mit demselben Wert von \(b\) durchgeführt
-werden).
-
-\textbf{Beispiel:}
-
-Sei \(b = 2\) und hat man insgesamt 32 Bit zur Verfügung
-
-26 Bit werden für die Mantisse (incl.~Vorzeichen) und 6 Bit für den
-Exponenten (incl.~Vorzeichen) 3 Bit verwendet. Das erste Bit
-kennzeichnet jeweils das Vorzeichen; dabei kann man insbesondere für den
-Exponenten auch die 2-Komplementdarstellung benutzen. Die rechnerinterne
-Darstellung der Zahl 12,25 würde dann wie folgt aussehen:
-
-\includegraphics[width=3.125in,height=\textheight,keepaspectratio]{images/beispiel.jpg}
-
-\textbf{Thema zum Weiterdenken:} Die Gleitkommadarstellung ist nicht
-eindeutig. Die Zahle 12,26 läst sich auf zum Beispiel diese Arten
-darstellen.
-
-\begin{itemize}
-\tightlist
-\item
-  \(1100,01\cdot 2^0\)
-\item
-  \(110,001\cdot 2^1\)
-\item
-  \(11,0001\cdot 2^2\)
-\item
-  usw.
-\end{itemize}
-
-Daher wird in der Informatik die \textbf{normierte
-Gleitkommadarstellung} verwendet, bei der die Mantisse immer mit einer 1
-beginnt (außer bei der Zahl 0). Dadurch wird die Darstellung eindeutig
-und es gibt keine Mehrdeutigkeiten mehr. Informiere dich über die
-normierte Gleitkommadarstellung.
-
-\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, opacityback=0, colframe=quarto-callout-important-color-frame, arc=.35mm, colback=white, bottomrule=.15mm, breakable, rightrule=.15mm, colbacktitle=quarto-callout-important-color!10!white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Folgerung}, titlerule=0mm, toptitle=1mm, leftrule=.75mm, opacitybacktitle=0.6, bottomtitle=1mm, toprule=.15mm]
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Es sind auf diese Weise nur endlich viele reelle Zahlen darstellbar.
-\item
-  Es gibt jeweils eine kleinste und eine größte darstellbare Zahl.
-\item
-  Es gibt ein endliches Intevall um den Nullpunkt, in dem keine
-  darstellbare Zahl liegt.
-\item
-  Ein analoges Intervall gibt es selbstverständlich um andere Zahlen.
-\end{enumerate}
-
-\end{tcolorbox}
-
-\subsubsection{2.9 Skripte in Python}\label{skripte-in-python}
-
-Neben der Möglihckeit im Terminal oder mit Jupyter direkt mit dem Python
-interpreter zu kummunizieren, gibt es die Möglichkeit eine
+Neben der Möglichkeit im Terminal oder mit Jupyter direkt mit dem Python
+interpreter zu kommunizieren, gibt es die Möglichkeit eine
 Quellcodedatei zu erstellen, ein Skript und diese dann insgesamt zum
 Python-Compiler zu übergeben.
 
