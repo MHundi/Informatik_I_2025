@@ -1,0 +1,784 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+    \setmainfont[]{Avenir Next}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[top=3cm, bottom=2cm, left=4cm, right=2cm]{geometry}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage[document]{ragged2e}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\definecolor{QuartoInternalColor1}{rgb}{0.70,0.17,0.19}
+\definecolor{QuartoInternalColor6}{rgb}{0.70,0.49,0.07}
+\definecolor{QuartoInternalColor5}{rgb}{0.00,0.40,0.00}
+\definecolor{QuartoInternalColor2}{rgb}{0,0,0}
+\definecolor{QuartoInternalColor3}{rgb}{0.15,0.56,0.56}
+\definecolor{QuartoInternalColor4}{rgb}{0.00,0.45,0.15}
+\makeatother
+
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={4. Variablen},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{4. Variablen}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+Variablen sind ein fundamentales Konzept in Programmiersprachen, da sie
+es ermöglichen, Daten temporär im Speicher zu speichern und später
+wieder abzurufen. Ohne Variablen könnten Programme keine Eingaben
+verarbeiten, Zwischenergebnisse speichern oder auf veränderte Daten
+reagieren. Sie fungieren als Container für Werte, die sich während der
+Programmausführung ändern können, was die Grundlage für dynamische und
+interaktive Programme bildet. Variablen machen Programme flexibel und
+wiederverwendbar, da derselbe Code mit unterschiedlichen Daten arbeiten
+kann. Darüber hinaus verbessern sie die Lesbarkeit und Wartbarkeit von
+Code, indem sie aussagekräftige Namen für Daten bereitstellen.
+
+In Python sind folgende Datentypen für Variablen möglich:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{int} für Ganzzahlen
+\item
+  \texttt{float} für Fließkommazahlen
+\item
+  \texttt{string} für Zeichenketten
+\item
+  \texttt{boolean} für Wahrheitswerte
+\item
+  \texttt{list} für Listen
+\item
+  \texttt{tuple} für Tupel
+\end{itemize}
+
+\paragraph{Beispiel}\label{beispiel}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{note }\OperatorTok{=} \DecValTok{123}
+\BuiltInTok{print}\NormalTok{(note)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+123
+\end{verbatim}
+
+\paragraph{Syntax}\label{syntax}
+
+\begin{tcolorbox}[enhanced jigsaw, leftrule=.75mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Syntax}, arc=.35mm, left=2mm, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, opacityback=0, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, bottomrule=.15mm, breakable, toprule=.15mm, colback=white, coltitle=black]
+
+\texttt{Bezeichner\ =\ Ausdruck}
+
+\end{tcolorbox}
+
+\paragraph{Bemerkungen}\label{bemerkungen}
+
+\begin{itemize}
+\tightlist
+\item
+  Python ist eine dynamische Sprache, d.h. Variablen müssen nicht
+  deklariert werden. Der Typ einer Variablen wird durch den Wert
+  bestimmt, der ihr zugewiesen wird.
+\item
+  Pro Zeile nur eine Anweisung!
+\item
+  linke Seite: Bezeichner = Variablennamen = Identifier
+\item
+  rechte Seite: Ausdruck oder ein Wert
+\item
+  Gleichheitszeichen ist der Zuweisungsoperator
+\item
+  Variablen sind erst nach einer Anweisung verwendbar.
+\item
+  Erst wird die rechte Seite ausgewertet und dann an die Variable
+  zugewiesen.
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, leftrule=.75mm, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Achtung}, arc=.35mm, left=2mm, colbacktitle=quarto-callout-warning-color!10!white, rightrule=.15mm, colframe=quarto-callout-warning-color-frame, titlerule=0mm, opacityback=0, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, bottomrule=.15mm, breakable, toprule=.15mm, colback=white, coltitle=black]
+
+Das Gleichheitszeichen ist der Zuweisungsoperator und nicht das
+mathematische Gleichheitszeichen (Vergleichsoperator).
+
+\end{tcolorbox}
+
+\paragraph{Regeln für die Wahl des
+Bezeichners}\label{regeln-fuxfcr-die-wahl-des-bezeichners}
+
+\begin{itemize}
+\tightlist
+\item
+  Buchstaben, Unterstriche und Ziffern
+\item
+  erste Zeichen keine Ziffer
+\item
+  keine Leerzeichen
+\item
+  keine Python Schlüsselwörter (if, else, return, class, or,\ldots)
+\item
+  Python ist case-sensitive, d.h. Groß- und Kleinschreibung
+  unterscheiden sich.
+\end{itemize}
+
+\paragraph{Ausdrücke}\label{ausdruxfccke}
+
+Ausdrücke können sein: - Operatoren - Literalen - Variablen
+
+Die Auswertung eines Ausdrucks liefert einen Wert oder bricht mit
+Fehlermeldung ab. Die Auswertung bei arithmetischen Ausdrücken läuft
+nach folgenden Regeln ab:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Klammern zuerst
+\item
+  Potenzen
+\item
+  Multiplikation / Division
+\item
+  Addition / Subtraktion
+\item
+  ansonsten von links nach rechts.
+\end{enumerate}
+
+\paragraph{Beispiele:}\label{beispiele}
+
+Zuweisung von Werten an Variablen
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{note }\OperatorTok{=} \DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+Ausgabe der Variablen
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\BuiltInTok{print}\NormalTok{(note)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+4
+\end{verbatim}
+
+Mit Variablen rechnen
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\BuiltInTok{print}\NormalTok{(}\DecValTok{2}\OperatorTok{*}\DecValTok{4}\OperatorTok{**}\NormalTok{note)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+512
+\end{verbatim}
+
+Dynamische Typisierung
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{durchschnitt }\OperatorTok{=} \FloatTok{12.3}
+\BuiltInTok{print}\NormalTok{(durchschnitt)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+12.3
+\end{verbatim}
+
+Rechnen mit unterschiedkichen Zahldatentypen
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\BuiltInTok{print}\NormalTok{(durchschnitt }\OperatorTok{*}\NormalTok{ note)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+49.2
+\end{verbatim}
+
+Fehler bei nicht definierten Variablen
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\BuiltInTok{print}\NormalTok{(goody)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Highlighting}
+\textcolor{black}{NameError: name 'goody' is not defined}
+\textcolor{black}{}\textcolor{QuartoInternalColor1}{---------------------------------------------------------------------------}\textcolor{QuartoInternalColor2}{}
+\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor1}{NameError}\textcolor{QuartoInternalColor2}{                                 Traceback (most recent call last)}
+\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor3}{Cell}\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor3}{ }\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor4}{In[60]}\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor4}{, line 1}\textcolor{QuartoInternalColor2}{}
+\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor4}{----> }\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor4}{1}\textcolor{QuartoInternalColor2}{ }\textcolor{QuartoInternalColor5}{print}\textcolor{QuartoInternalColor2}{(}\textcolor{QuartoInternalColor2}{goody}\textcolor{QuartoInternalColor2}{)}
+\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor1}{NameError}\textcolor{QuartoInternalColor2}{: name 'goody' is not defined}
+\end{Highlighting}
+
+Strings sind Zeichenketten, die in Anführungszeichen stehen. Sie können
+mit Variablen verknüpft werden.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\BuiltInTok{print}\NormalTok{(}\StringTok{"ham"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ham
+\end{verbatim}
+
+analog geht das auch mit einfachen Anführungszeichen
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}egg\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tcolorbox}[enhanced jigsaw, leftrule=.75mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Info}, arc=.35mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colframe=quarto-callout-tip-color-frame, titlerule=0mm, opacityback=0, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, bottomrule=.15mm, breakable, toprule=.15mm, colback=white, coltitle=black]
+
+Der PEP 8 (Python Style Guide) empfiehlt, Strings in einfachen
+Anführungszeichen zu schreiben.
+
+\end{tcolorbox}
+
+Der +-Operator wird bei Strings für die Verkettung von Strings
+(Konkatenation)verwendet.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}ham\textquotesingle{}}\OperatorTok{+}\StringTok{\textquotesingle{}egg\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+hamegg
+\end{verbatim}
+
+Stings lassen sich in Python auch mit ganzen Zahlen über den *-Operator
+verknüpfen, was zu einer Wiederholung des Strings führt.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+
+\NormalTok{::: \{.cell\}}
+\NormalTok{\textasciigrave{}\textasciigrave{}\textasciigrave{} \{.python .cell}\OperatorTok{{-}}\NormalTok{code\}}
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}ham\textquotesingle{}}\OperatorTok{*}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+hamhamham
+\end{verbatim}
+
+:::
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\BuiltInTok{print}\NormalTok{(}\StringTok{\textquotesingle{}ham\textquotesingle{}}\OperatorTok{*}\FloatTok{1.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Highlighting}
+\textcolor{black}{TypeError: can't multiply sequence by non-int of type 'float'}
+\textcolor{black}{}\textcolor{QuartoInternalColor1}{---------------------------------------------------------------------------}\textcolor{QuartoInternalColor2}{}
+\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor1}{TypeError}\textcolor{QuartoInternalColor2}{                                 Traceback (most recent call last)}
+\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor3}{Cell}\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor3}{ }\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor4}{In[21]}\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor4}{, line 1}\textcolor{QuartoInternalColor2}{}
+\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor4}{----> }\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor4}{1}\textcolor{QuartoInternalColor2}{ }\textcolor{QuartoInternalColor5}{print}\textcolor{QuartoInternalColor2}{(}\textcolor{QuartoInternalColor2}{'}\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor2}{ham}\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor2}{'}\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor2}{*}\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor2}{1.5}\textcolor{QuartoInternalColor2}{)}
+\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor1}{TypeError}\textcolor{QuartoInternalColor2}{: can't multiply sequence by non-int of type 'float'}
+\end{Highlighting}
+
+Mit \texttt{asserts} wird überprüft, ob der Wert eines Strings einem
+vorgegebenen Wert entspricht und wird für Tests verwendet. Stimmmt der
+Wert überein, passiert nichts, ansonsten wird eine Fehlermeldung
+ausgegeben.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\ControlFlowTok{assert} \DecValTok{0}\OperatorTok{*} \StringTok{\textquotesingle{}egg\textquotesingle{}} \OperatorTok{==} \StringTok{""}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\ControlFlowTok{assert} \DecValTok{0}\OperatorTok{*} \StringTok{\textquotesingle{}egg\textquotesingle{}} \OperatorTok{==} \StringTok{\textquotesingle{}egg\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Highlighting}
+\textcolor{black}{AssertionError: }
+\textcolor{black}{}\textcolor{QuartoInternalColor1}{---------------------------------------------------------------------------}\textcolor{QuartoInternalColor2}{}
+\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor1}{AssertionError}\textcolor{QuartoInternalColor2}{                            Traceback (most recent call last)}
+\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor3}{Cell}\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor3}{ }\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor4}{In[24]}\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor4}{, line 1}\textcolor{QuartoInternalColor2}{}
+\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor4}{----> }\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor4}{1}\textcolor{QuartoInternalColor2}{ }\textcolor{QuartoInternalColor5}{assert}\textcolor{QuartoInternalColor2}{ }\textcolor{QuartoInternalColor4}{0}\textcolor{QuartoInternalColor2}{* }\textcolor{QuartoInternalColor6}{'}\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor6}{egg}\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor6}{'}\textcolor{QuartoInternalColor2}{ == }\textcolor{QuartoInternalColor6}{'}\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor6}{egg}\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor6}{'}\textcolor{QuartoInternalColor2}{}
+\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor1}{AssertionError}\textcolor{QuartoInternalColor2}{: }
+\end{Highlighting}
+
+Python ist Case-Sensitive.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{Number }\OperatorTok{=} \DecValTok{10}
+\BuiltInTok{print}\NormalTok{(Number) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\BuiltInTok{print}\NormalTok{(number)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Highlighting}
+\textcolor{black}{NameError: name 'number' is not defined}
+\textcolor{black}{}\textcolor{QuartoInternalColor1}{---------------------------------------------------------------------------}\textcolor{QuartoInternalColor2}{}
+\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor1}{NameError}\textcolor{QuartoInternalColor2}{                                 Traceback (most recent call last)}
+\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor3}{Cell}\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor3}{ }\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor4}{In[26]}\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor4}{, line 1}\textcolor{QuartoInternalColor2}{}
+\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor4}{----> }\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor4}{1}\textcolor{QuartoInternalColor2}{ }\textcolor{QuartoInternalColor5}{print}\textcolor{QuartoInternalColor2}{(}\textcolor{QuartoInternalColor2}{number}\textcolor{QuartoInternalColor2}{)}
+\textcolor{QuartoInternalColor2}{}\textcolor{QuartoInternalColor1}{NameError}\textcolor{QuartoInternalColor2}{: name 'number' is not defined}
+\end{Highlighting}
+
+\subsection{Informationstechnische
+Betrachtung}\label{informationstechnische-betrachtung}
+
+Der Speicher des Computers lässt sich mit einem Tassenschrank
+vergleichen, in dem jede Tasse für eine Variable steht. In jede Tasse
+kann ein Wert gelegt werden und der Name der Tasse ist der Bezeichner
+der Variablen.
+
+\includegraphics[width=4.16667in,height=\textheight,keepaspectratio]{images/tassenschrank.jpg}
+
+Genauer betrachtet wird bei der Zuweisung von Variablen im Speicher ein
+Bereich reserviert, der den Wert der Variablen als Binärzahl speichert.
+Der Variablenname (Bezeichner) ist ein daher der Zeiger auf diesen
+Bereich.
+
+\includegraphics[width=4.16667in,height=\textheight,keepaspectratio]{images/ref.jpg}
+
+Die Speicheradresse lässt sich mit der id-Funktion ermitteln.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\BuiltInTok{id}\NormalTok{(note)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+4379198056
+\end{verbatim}
+
+\begin{tcolorbox}[enhanced jigsaw, leftrule=.75mm, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Interpretation der id() Funktion}, arc=.35mm, left=2mm, colbacktitle=quarto-callout-tip-color!10!white, rightrule=.15mm, colframe=quarto-callout-tip-color-frame, titlerule=0mm, opacityback=0, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, bottomrule=.15mm, breakable, toprule=.15mm, colback=white, coltitle=black]
+
+Die \texttt{id()} Funktion gibt eine \textbf{eindeutige Ganzzahl}
+zurück, die das Objekt im Speicher identifiziert.
+
+\textbf{Was bedeutet diese Zahl?} - Die Zahl ist die
+\textbf{Speicheradresse} des Objekts (in CPython) - Jedes Objekt hat zur
+Laufzeit eine eindeutige ID - Solange das Objekt existiert, bleibt die
+ID konstant - Nach dem Löschen des Objekts kann die ID wiederverwendet
+werden
+
+\textbf{Beispiel-Interpretation:}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{x }\OperatorTok{=} \DecValTok{42}
+\BuiltInTok{print}\NormalTok{(}\BuiltInTok{id}\NormalTok{(x))  }\CommentTok{\# Ausgabe z.B.: 140712345678912}
+\end{Highlighting}
+\end{Shaded}
+
+Die Zahl \texttt{140712345678912} ist die \textbf{Hexadezimal-Adresse im
+Arbeitsspeicher}, wo Python das Objekt mit dem Wert 42 gespeichert hat.
+
+\textbf{Wichtige Erkenntnisse:} - Gleiche ID = Gleiches Objekt im
+Speicher - Verschiedene ID = Verschiedene Objekte im Speicher - Die
+absolute Zahl ist nicht wichtig, nur der Vergleich zwischen IDs
+
+\end{tcolorbox}
+
+Wird ein weiterer Bezeichner auf die gleiche Variable eingeführt, so
+referenziert dieser bei den einfachen Datentypen (int float) nicht den
+gleichen Speicherbereich, sondern erhält eine Wertkopie. Damit ändert
+sich der Wert der ersten Variablen nicht, wenn man den Wert der zweiten
+Variablen ändert.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{test1 }\OperatorTok{=} \DecValTok{10}
+\BuiltInTok{print}\NormalTok{(test1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{test2}\OperatorTok{=}\NormalTok{test1}
+\BuiltInTok{print}\NormalTok{(test2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\BuiltInTok{id}\NormalTok{(test1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+4379194440
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\BuiltInTok{id}\NormalTok{(test2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+4379194440
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{test2}\OperatorTok{=}\DecValTok{9}
+\BuiltInTok{print}\NormalTok{(test2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\BuiltInTok{id}\NormalTok{(test2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+4379194408
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\BuiltInTok{print}\NormalTok{(test1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+10
+\end{verbatim}
+
+\begin{tcolorbox}[enhanced jigsaw, leftrule=.75mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Erklärung}, arc=.35mm, left=2mm, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, opacityback=0, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, bottomrule=.15mm, breakable, toprule=.15mm, colback=white, coltitle=black]
+
+Python verwendet \textbf{Integer Caching} (Small Integer Optimization)
+für kleine Ganzzahlen (typischerweise -5 bis 256). Python speichert die
+kleinen Ganzzahlen weil sie häufig verwendet werden, nur einmal im
+Speicher und lässt alle Variablen mit demselben Wert auf dasselbe Objekt
+zeigen. Sobald Sie test2 einen neuen Wert zuweisen, zeigt es auf ein
+anderes gecachtes Objekt und erhält eine neue ID, während test1
+weiterhin auf das ursprüngliche Objekt für den Wert 10 zeigt.
+
+Om Detail bedeudet dies:
+
+\begin{itemize}
+\tightlist
+\item
+  Bei \texttt{test1\ =\ 10} wird das gecachte Objekt für 10 verwendet
+\item
+  Bei \texttt{test2\ =\ test1} zeigt test2 auf dasselbe gecachte Objekt
+  → gleiche ID
+\item
+  Bei \texttt{test2\ =\ 9} wird test2 auf das gecachte Objekt für 9
+  umgeleitet → neue ID
+\end{itemize}
+
+\textbf{Wichtig:} Obwohl beide Variablen zunächst die gleiche ID haben,
+sind sie konzeptionell unabhängig. Eine Änderung von test2 beeinflusst
+test1 nicht, da bei der Neuzuweisung ein anderes Objekt referenziert
+wird.
+
+Dies ist anders als bei komplexeren Datentypen wie Listen, wo echte
+Referenzen verwendet werden.
+
+\end{tcolorbox}
+
+Und wie sieht das bei Fließkommazahlen aus?
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{test3 }\OperatorTok{=} \FloatTok{1334.2}
+\BuiltInTok{id}\NormalTok{(test3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+4420604848
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{test4}\OperatorTok{=}\NormalTok{test3}
+\BuiltInTok{id}\NormalTok{(test4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+4420604848
+\end{verbatim}
+
+Bei \texttt{float}-Werten gibt es natürlich kein Integer Caching wie bei
+kleinen Ganzzahlen. Trotzdem haben \texttt{test3} und \texttt{test4} die
+gleiche ID, weil es sich um ein immutable Objekt handelt. Dieses
+Verhalten ist bei allen unveränderlichen (immutable) Datentypen in
+Python gleich.
+
+\begin{tcolorbox}[enhanced jigsaw, leftrule=.75mm, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Definition}, arc=.35mm, left=2mm, colbacktitle=quarto-callout-note-color!10!white, rightrule=.15mm, colframe=quarto-callout-note-color-frame, titlerule=0mm, opacityback=0, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, bottomrule=.15mm, breakable, toprule=.15mm, colback=white, coltitle=black]
+
+\textbf{Immutable} (unveränderlich) bedeutet, dass der Wert eines
+Objekts nach seiner Erstellung nicht mehr verändert werden kann.
+
+\end{tcolorbox}
+
+\textbf{Immutable Datentypen in Python:} - \texttt{int} (Ganzzahlen) -
+\texttt{float} (Fließkommazahlen) - \texttt{str} (Strings/Zeichenketten)
+- \texttt{tuple} (Tupel) - \texttt{bool} (Wahrheitswerte) -
+\texttt{frozenset} (unveränderliche Mengen)
+
+\textbf{Mutable Datentypen in Python:} - \texttt{list} (Listen) -
+\texttt{dict} (Dictionaries/Wörterbücher) - \texttt{set} (Mengen)
+
+\begin{tcolorbox}[enhanced jigsaw, leftrule=.75mm, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Wichtig}, arc=.35mm, left=2mm, colbacktitle=quarto-callout-important-color!10!white, rightrule=.15mm, colframe=quarto-callout-important-color-frame, titlerule=0mm, opacityback=0, opacitybacktitle=0.6, toptitle=1mm, bottomtitle=1mm, bottomrule=.15mm, breakable, toprule=.15mm, colback=white, coltitle=black]
+
+Bei immutable Datentypen wird bei jeder ``Änderung'' ein neues Objekt
+erstellt!
+
+\end{tcolorbox}
+
+Zustand eines Programms nach Ausführung wird vollständig beschrieben
+durch die Belegung aller Variablen mit Werten.
+
+
+
+
+\end{document}
