@@ -1,0 +1,963 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+    \setmainfont[]{Avenir Next}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[top=3cm, bottom=2cm, left=4cm, right=2cm]{geometry}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage[document]{ragged2e}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={3.2 Datenrepräsentation},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{3.2 Datenrepräsentation}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+\subsection{3.2.1 Bits}\label{bits}
+
+Ein Bit (Binary Digit) ist die kleinste Informationseinheit in der
+digitalen Welt. Es kann nur zwei Zustände annehmen: 0 oder 1. In
+Computern werden alle Daten -- Zahlen, Texte, Bilder und Programme --
+letztlich als lange Folgen von Bits gespeichert und verarbeitet. Die
+Zustände 0 und 1 entsprechen dabei physikalisch unterschiedlichen
+Spannungen oder Schaltzuständen in elektronischen Bauteilen. Zur
+Darstellung eines Bits in Python wird der Datentyp \texttt{bool}
+verwendet, der die Werte \texttt{True} (1) und \texttt{False} (0)
+repräsentiert.
+
+\subsubsection{Grundoperationen auf
+Bits}\label{grundoperationen-auf-bits}
+
+Mittels der logischen Interpretation von Bits als Wahrheitswerte, können
+drei Grundoperationen definiert werden, die auf Bits angewendet werden
+können.
+
+\textbf{1. Logisches AND: \(b_1 \land b_2\)}
+
+\begin{longtable}[]{@{}ccc@{}}
+\toprule\noalign{}
+\(b_1\) & \(b_2\) & \(b_1 \land b_2\) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & 0 & 0 \\
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+1 & 1 & 1 \\
+\end{longtable}
+
+\textbf{2. Logisches OR: \(b_1 \lor b_2\)}
+
+\begin{longtable}[]{@{}ccc@{}}
+\toprule\noalign{}
+\(b_1\) & \(b_2\) & \(b_1 \lor b_2\) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & 0 & 0 \\
+1 & 0 & 1 \\
+0 & 1 & 1 \\
+1 & 1 & 1 \\
+\end{longtable}
+
+\textbf{3. Logisches NOT (Negation, Komplement): \(\neg b\)}
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule\noalign{}
+\(b\) & \(\neg b\) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & 1 \\
+1 & 0 \\
+\end{longtable}
+
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, toprule=.15mm, rightrule=.15mm, opacityback=0, bottomrule=.15mm, titlerule=0mm, leftrule=.75mm, left=2mm, coltitle=black, colframe=quarto-callout-important-color-frame, bottomtitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Satz}, arc=.35mm, breakable, colback=white]
+
+Mit den drei Grundoperationen \textbf{AND}, \textbf{OR} und \textbf{NOT}
+können alle möglichen Operationen auf Bits definiert werden.
+
+\end{tcolorbox}
+
+\textbf{Beispiel 1}
+
+\begin{longtable}[]{@{}ccc@{}}
+\toprule\noalign{}
+\(b_1\) & \(b_2\) & \(f(b_1, b_2)\) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & 0 & 0 \\
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+1 & 1 & 1 \\
+\end{longtable}
+
+Auflösung: \(f(b_1,b_2)=b_1 \land b_2\)
+
+\textbf{Beispiel 2}
+
+\begin{longtable}[]{@{}ccc@{}}
+\toprule\noalign{}
+\(b_1\) & \(b_2\) & \(f(b_1, b_2)\) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & 0 & 1 \\
+1 & 0 & 1 \\
+0 & 1 & 0 \\
+1 & 1 & 1 \\
+\end{longtable}
+
+\textbf{Bemerkung:}
+
+entweder oder
+
+\begin{longtable}[]{@{}ccc@{}}
+\toprule\noalign{}
+\(b_1\) & \(b_2\) & \(b_1 \text{ xor }b_2\) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & 0 & 0 \\
+1 & 0 & 1 \\
+0 & 1 & 1 \\
+1 & 1 & 0 \\
+\end{longtable}
+
+\textbf{Bemerkung:}
+
+Bitweise Addition mit Übertrag
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1282}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1282}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.5385}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2051}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+\(b_1\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(b_2\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Summe: \(b_1 \text{ xor }b_2\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Übertrag: \$b\_1 \land b\_2 \$
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 \\
+0 & 1 & 1 & 0 \\
+1 & 1 & 0 & 1 \\
+\end{longtable}
+
+\textbf{Bemerkung:}
+
+Bitweise Subtraktion, Multiplikation und Division vergleiche
+Arbeitsblatt.
+
+\subsection{Exkurs Aussagenlogik}\label{exkurs-aussagenlogik}
+
+Die Aussagenlogik ist ein grundlegendes Werkzeug, um Sachverhalte
+präzise zu beschreiben und logisch zu analysieren. In der Mathematik
+wird sie genutzt, um Beweise zu führen, Aussagen zu verknüpfen und die
+Gültigkeit von Argumenten zu überprüfen. In der Informatik bildet die
+Aussagenlogik die Basis für die Entwicklung von Algorithmen, die
+Funktionsweise von Schaltungen, die Programmierung von Bedingungen (if,
+while, etc.) und die Fehleranalyse. Sie hilft, komplexe Probleme in
+einfache, logisch überprüfbare Einzelschritte zu zerlegen.
+
+\subsubsection{Grundbegriffe}\label{grundbegriffe}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Aussage:} Ein Satz, der eindeutig wahr oder falsch ist.
+\item
+  \textbf{Wahrheitswert:} Jede Aussage ist entweder wahr (W) oder falsch
+  (F).
+\item
+  \textbf{Logische Operatoren:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Negation (\(\neg\)):} Nicht
+  \item
+    \textbf{Konjunktion (\(\land\)):} Und
+  \item
+    \textbf{Disjunktion (\(\lor\)):} Oder
+  \item
+    \textbf{Implikation (\(\Rightarrow\)):} Wenn \ldots{} dann
+  \item
+    \textbf{Äquivalenz (\(\Leftrightarrow\)):} Genau dann, wenn
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Wahrheitstafeln}\label{wahrheitstafeln}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.0769}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.0769}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1795}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.2821}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1282}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1282}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1282}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+A
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+B
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\(\neg\) A
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+A \(\land\) B
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+A \(\lor\) B
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+A \(\Rightarrow\) B
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+A \(\Leftrightarrow\) B
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+W & W & F & W & W & W & W \\
+W & F & F & F & W & F & F \\
+F & W & W & F & W & W & F \\
+F & F & W & F & F & W & W \\
+\end{longtable}
+
+\subsubsection{Beispiele}\label{beispiele}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Negation:} Die Aussage „Es regnet`` wird zu „Es regnet
+  nicht``.
+\item
+  \textbf{Konjunktion:} „Es regnet und es ist warm.``
+\item
+  \textbf{Disjunktion:} „Es regnet oder es ist warm.``
+\item
+  \textbf{Implikation:} „Wenn es regnet, dann ist die Straße nass.``
+\item
+  \textbf{Äquivalenz:} „Die Lampe leuchtet genau dann, wenn der Schalter
+  an ist.``
+\end{itemize}
+
+\subsection{3.2.2 Bytes}\label{bytes}
+
+Das Rechnen mit Bits ist ineffizient. Daher werden 8 Bits zu einem Byte
+zusammengefasst. Ein Byte dient als Grundeinheit der Datenspeicherung.
+Man spricht auch von einem 8-Bitvektor oder von einem Wort der Länge 8.
+Es gibt aber auch 16, 32, 64 Bit Worte. Daher spricht man von
+Wortbreite. (vgl. 32-Bit- und 64-Bit-Architekturen)
+
+Alle Daten werden im Computer als Bitvektoren dargestellt. Die
+Interpretation des Bitvektors hängt vom Datentyp ab. (int vs.~float vs
+string)
+
+\subsubsection{Grundrechenarten von Worten mit mehr als 1
+Bit}\label{grundrechenarten-von-worten-mit-mehr-als-1-bit}
+
+\paragraph{Addition}\label{addition}
+
+\begin{longtable}[]{@{}ccc@{}}
+\toprule\noalign{}
++ & 0 & 1 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{0} & 0 & 1 \\
+\textbf{1} & 1 & 0 mit Übertrag 1 \\
+\end{longtable}
+
+\textbf{Beispiel} \[\begin{aligned}\quad &111001\\
++&111011\\
+\text{Übertrag: } &110110\\
+\hline
+1&110100
+\end{aligned}
+\]
+
+\paragraph{Subtraktion}\label{subtraktion}
+
+\begin{longtable}[]{@{}ccc@{}}
+\toprule\noalign{}
+- & 0 & 1 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{0} & 0 & 1 mit Übertrag 1 \\
+\textbf{1} & 1 & 0 \\
+\end{longtable}
+
+\textbf{Beispiel} \[\begin{aligned}\quad &111001\\
+-&111011\\
+\text{Übertrag }&110110\\
+\hline
+1&110100
+\end{aligned}
+\]
+
+\paragraph{Multiplikation}\label{multiplikation}
+
+\begin{longtable}[]{@{}ccc@{}}
+\toprule\noalign{}
+* & 0 & 1 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{0} & 0 & 0 \\
+\textbf{1} & 0 & 1 \\
+\end{longtable}
+
+\textbf{Beispiel} siehe Arbeitsblatt
+
+\paragraph{Division}\label{division}
+
+\begin{longtable}[]{@{}ccc@{}}
+\toprule\noalign{}
+/ & 0 & 1 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{0} & not defined & 0 \\
+\textbf{1} & not defined & 1 \\
+\end{longtable}
+
+\textbf{Beispiel} siehe Arbeitsblatt
+
+Bytes lassen sich mittels der Bitoperationen vergleichen. Dazu kenne wir
+das logische Und, Oder und Nicht.
+
+\begin{itemize}
+\tightlist
+\item
+  Analog der Bitoperationen gibt es
+  \(w_1 \land w_2, w_1 \lor w_2, \neg w\)
+\item
+  Nur definiert auf Worte gleicher Breite
+\item
+  Anwendung der Bitoperation auf entsprechenden Operationen
+\end{itemize}
+
+\textbf{Beispiele:}
+
+\(1011 \land 1010 = (1 \land 1)(0 \land 0)(1 \land 1)(1 \land 0)) = 1011\)
+
+\(\neg 1010 = (\neg 1)(\neg 0)(\neg 1)(\neg 0) = 0101\)
+
+\subsection{3.2.3 Umformen der
+Zahldarstellung}\label{umformen-der-zahldarstellung}
+
+Bei uns Menschen herrscht auf Grund der 10 Finger das Dezimalsystem =
+Zehnersystem vor. In diesem System gibt es die Ziffern 0, 1, \ldots{} 9.
+Möchte man größere Zahlen darstellen, so werden die Ziffern in
+verschiedenen Stellenwerten verwendet. Jede Stelle entspricht einer 10er
+Potenz, beginnend von rechts mit \(10^0\). Die Basis des Systems ist
+somit 10.
+
+\textbf{Beispiel:}
+
+\(3455_{10}=3\cdot 10^3+4\cdot 10^2+5\cdot 10^1+5\cdot 10^0\)
+
+\$ = 3\cdot 1000 + 4 \cdot 100 + 5 \cdot 10 + 5\cdot 1 \$
+
+Ein Computer arbeitet jedoch mit dem Binärsystem, das die kleinste
+Informationseinheit ein Bit darstellt, welches den Zustand 0 (Strom aus)
+oder Zustand 1 (Strom an) annehmen kann. Die Basis im Binärsystem ist
+die 2. Es gibt nur die beiden Ziffern 0 und 1. Möchte man größere Zahlen
+darstellen, benötigt man analog zum bekannten Dezimalsystem ein
+Stellenwertsystem. Im Fall des Binärsystems wird dafür die Basis 2
+verwendet. Jede Stelle einer Zahl im Binärsystem entspricht vom Wert her
+einer 2ert Potenz, beginnend von rechts mit \(2^0\).
+
+\textbf{Beispiel}
+
+\(110011_2 = 1 \cdot 2^5 +1 \cdot 2^4 +0\cdot 2^3+0 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0\)
+
+\(= 1 \cdot 32 + 1\cdot16 + 0\cdot 8+ 0\cdot 4+ 1\cdot 2+1\cdot 1\)
+
+Es muss Möglichkeiten geben, um die Zahlendarstellungen umzurechnen. Die
+Umrechnung von Binärzahl ind Dezimalzahl ist leicht. Man addiert die
+Produkte der Stellenwerte und erhält die Dezimalzahl. Mit der Umrechnung
+von Dezimalzahlen in Binärzahlen ist es nicht so einfach.Das obere
+Beispiel ergibt somit:
+
+\(110011_2 = 1 \cdot 2^5 +1 \cdot 2^4 +0\cdot 2^3+0 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0\)
+
+\(= 1 \cdot 32 + 1\cdot16 + 0\cdot 8+ 0\cdot 4+ 1\cdot 2+1\cdot 1\)
+
+\(= 51_{10}\)
+
+Die Umrechnung von Dezimalzahlen in Binärzahlen ist ein Beispiel für
+einen Algorithmus, ein zentrales Konzept der Informatik.
+
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, rightrule=.15mm, opacityback=0, bottomrule=.15mm, titlerule=0mm, leftrule=.75mm, left=2mm, coltitle=black, colframe=quarto-callout-note-color-frame, bottomtitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Definition}, arc=.35mm, breakable, colback=white]
+
+Ein Algorithms ist eine Vorschrift mit folgenden Eigenschaften:
+
+\begin{itemize}
+\item
+  \textbf{Präzision} - Die Bedeutung jedes Schritts ist eindeutig
+  festgelegt.
+\item
+  \textbf{Effektivität} - Jeder Schritt ist ausführbar.
+\item
+  \textbf{Finitheit (statisch)} - Die Vorschrift ist ein endlicher Text
+\item
+  \textbf{Finitheit (dynamisch)} - Zur Ausführung wird nur endlich viel
+  Speicher benötigt.
+\item
+  \textbf{Terminierung} - Die Berechnung endet für alle legalen Eingaben
+  nach endlich vielen Schritten.
+\end{itemize}
+
+Wünschenswert sind dazu folgende Eigenschaften:
+
+\begin{itemize}
+\item
+  \textbf{Determinismus} - Folgeschritte sind immer eindeutig
+  festgelegt.
+\item
+  \textbf{Determiniertheit} - Bei gleicher Eingabe wird immer die
+  gleiche Ausgabe erzeugt.
+\item
+  \textbf{Generalität} - Die Vorschrift kann eine Klasse von Problemen
+  lösen.
+\end{itemize}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, rightrule=.15mm, opacityback=0, bottomrule=.15mm, titlerule=0mm, leftrule=.75mm, left=2mm, coltitle=black, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Bemerkung}, arc=.35mm, breakable, colback=white]
+
+Auch Vorschriften, welche die wünschenswerten Eigenschaften nicht
+erfüllen, werden als Algorithmen angesehen.
+
+\end{tcolorbox}
+
+\textbf{Beispiele:}
+
+\begin{itemize}
+\tightlist
+\item
+  Bedienungsanleitungen
+\item
+  Aufbauanleitung bei Möbeln zum Beispiel
+\item
+  Verhaltensvorschriften bei Unfällen, Alarmen, usw.
+\item
+  Rezepte (Vorsicht: Rezepte enthalten häufig Ungenauigkeiten)
+\item
+  Rechenvorschriften
+\item
+  usw.
+\end{itemize}
+
+\textbf{Algorithmus zur Umrechnung von Dezimalzahl in Binärzahl:}
+
+Gegeben Dezimalzahl n und die Basis b =2. q ist der Quotient aus n//b
+und r der Divisionsrest.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Bestimme \(q = n//b\) und \(r = n%b
+  \)
+\item
+  Schreibe r links an die Ausgabe
+\item
+  Falls \(q \neq 0\) gehe zu 1.
+\item
+  Sonst fertig.
+\end{enumerate}
+
+\textbf{Beispiel:}
+
+B=2 und n = 42
+
+\begin{itemize}
+\tightlist
+\item
+  \(42:2=21\) Rest \textbf{0}
+\item
+  \(21:2=10\) Rest \textbf{1}
+\item
+  \(10:2=5\) Rest \textbf{0}
+\item
+  \(5:2=2\) Rest \textbf{1}
+\item
+  \(2:2=1\) Rest \textbf{0}
+\item
+  \(1:2=0\) Rest \textbf{1}
+\item
+  Fertig, weil \(q=0\)
+\item
+  Ergebnis \(101010_2\) von unten nach oben gelesen.
+\end{itemize}
+
+\subsection{3.2.4 Hexadezimalsystem}\label{hexadezimalsystem}
+
+\begin{itemize}
+\tightlist
+\item
+  Stellenwertsystem mit Basis 16 = 4 Bit pro Stelle
+\item
+  Ziffern: 0, 1, \ldots{} 9, a, b, c, d, e, f
+\item
+  Jede Stelle entspricht einer 16er Potenz beginnen mit \(16^0\) von
+  rechts
+\end{itemize}
+
+\textbf{Beispiel:}
+
+\(\text{beef}_{16} = 11 \cdot 16^3 + 14 \cdot 16^2 +14 \cdot 16^1+ 15 \cdot 16^0\)
+
+\(= 11 \cdot 4096 + 14 \cdot 256 + 14 \cdot 16+ 15\)
+
+\(= 48879_{10}\)
+
+\subsection{3.2.5 Datentypen - Syntax und
+Semantik}\label{datentypen---syntax-und-semantik}
+
+\textbf{1. Semantik eines Datentyps} (Bedeutung)
+
+Menge von Werten und den Operationen auf diesen Werten.
+
+\textbf{2. Syntax} (Schreibweise, Darstellung)
+
+Darstellung eines Wertes (=Literal) und die Operationssymbole zu den
+Operationen.
+
+\textbf{3. Pragmatik}
+
+Syntax und Semantik sollen den üblichen mathematischen Konventionen und
+Definitionen entsprechen.
+
+\textbf{Beispiele:}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Integer
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Die Zahl sechszehn kann durch das Literal 16 dargestellt werden
+\item
+  Die Zahl sechszehn kann auch durch das Literal 0x10 (hexadezimal)
+  dargestellt werden.
+\item
+  Die Zahl sechszehn kann auch durch das Literas 0b10000 (binär)
+  dargestellt werden.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Float
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Die Zahl nullkommazwei kann durch das Literal 0.2 dargestellt werden.
+\item
+  Die Zahl nullkommazwei kann durch das Literal 2.0e-1 dargestellt
+  werden.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  String
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Die Zeichenkette \emph{Hund} kann als Literal ``Hund'' dargestellt
+  werden.
+\item
+  Die Zeichenkette \emph{Hund} kann als Literal `Hund' dargestellt
+  werden.
+\item
+  Die Zeichenkette \emph{Hund} kann als Literal '\,`'Hund'\,'\,'
+  dargestellt werden.
+\end{itemize}
+
+\textbf{In Python}
+
+Jeder Wert besteht aus zwei Teilen:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Typ
+\item
+  interen Repräsentaiton des Werts
+\end{enumerate}
+
+Die interne Representation des Wertes ist immer eine Folge von Bits.
+(Bitvektor) Der Bitvektor wird anhand des Typs interpretiert:
+
+\textbf{0x10} im Datentyp \textbf{int} würde als \textbf{16}
+interpretiert werden.
+
+\textbf{0x10} im Datentyp \textbf{float} würde als \textbf{2.24E44}
+interpretiert werden.
+
+\textbf{0x40490fd0} im Datentyp \textbf{float} würde als
+\textbf{3.14159} interpretiert werden.
+
+\textbf{0x40490fd0} im Datentyp \textbf{int} würde als
+\textbf{1078530000} interpretiert werden.
+
+\textbf{0x68656c6c6f00} im Datentyp \textbf{string} würde als
+\textbf{hello} interpretiert werden.
+
+\subsection{3.2.6 Realisierung der Ganzzahlwerte im Speicher -
+Zwei-Komplementdarstellung}\label{realisierung-der-ganzzahlwerte-im-speicher---zwei-komplementdarstellung}
+
+Zur rechnerinternen Darstellung ganzer Zahlen im 1Bit-Speicher wird
+häufig die sogenannte \textbf{2-Komplementdarstellung} verwendet.
+
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, rightrule=.15mm, opacityback=0, bottomrule=.15mm, titlerule=0mm, leftrule=.75mm, left=2mm, coltitle=black, colframe=quarto-callout-note-color-frame, bottomtitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Definition}, arc=.35mm, breakable, colback=white]
+
+Ein \textbf{Bit} (=binary digit)ist die kleinste mögliche
+Informationseinheit. Mögliche Werte für ein Bit sind 0 oder 1. Dies
+entspricht dem Computerzustand Strom an oder Strom aus. In der logischen
+Interpretation wäre falsch = 0 und wahr = -1.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, rightrule=.15mm, opacityback=0, bottomrule=.15mm, titlerule=0mm, leftrule=.75mm, left=2mm, coltitle=black, colframe=quarto-callout-note-color-frame, bottomtitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Definition}, arc=.35mm, breakable, colback=white]
+
+Der Wert einer Zahl \$ a=a\_n a\_\{n-1\} \ldots{} a\_0\$ mit \(n\) Bits
+in \textbf{2-Komplementdarstellung} ist definiert als:
+
+\[ \text{Wert}(a) =  -a_n·2^{n}+\sum_{i=0}^{n--1} a_i·2^i \]
+
+\end{tcolorbox}
+
+\textbf{Beispiel: 3-Bit 2-Komplementdarstellung \((n = 3)\)}
+
+\(\text{Wert}(101) = -0\cdot 2^3 + 1 \cdot 2^2 + 0 \cdot 2^1 = 2\)
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4937}}
+  >{\centering\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5063}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+Wert in 3-Bit 2-Komplementdarstellung
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Wert in Vorzeichen-/Betragsdarstellung
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+000 & 0 \\
+001 & 1 \\
+010 & 2 \\
+011 & 3 \\
+100 & -4 \\
+101 & -3 \\
+110 & -2 \\
+111 & -1 \\
+\end{longtable}
+
+\textbf{Vorteile}
+
+Vorteilhaft bei dieser Art der Darstellung ist: - Es gibt \textbf{nur
+eine Darstellung der Zahl 0}. - Die \textbf{Subtraktion zweier Zahlen}
+lässt sich einfach auf eine \textbf{Addition} zurückführen.
+
+\subsection{3.2.7 Realisierung von Fließkommawerten im Speicher -
+Gleitkommadarstellung}\label{realisierung-von-flieuxdfkommawerten-im-speicher---gleitkommadarstellung}
+
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-note-color!10!white, toprule=.15mm, rightrule=.15mm, opacityback=0, bottomrule=.15mm, titlerule=0mm, leftrule=.75mm, left=2mm, coltitle=black, colframe=quarto-callout-note-color-frame, bottomtitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Definition}, arc=.35mm, breakable, colback=white]
+
+Eine reelle (eigentlich: rationale) Zahl wird im 1Bit-Speicher
+dargestellt durch die sogenannte \textbf{Gleitkommadarstellung}:
+
+\[ z = m \cdot b^e \]
+
+mit - \(m\): Mantisse - \(b\): Basis - \(e\): Exponent (zur Basis b)
+
+In der Praxis wählt man für \(b\) meistens eine der Zahlen 2, 10, 16 und
+stellt dementsprechend die Zahl \(m\) als Ziffernfolge im Dual-,
+Dezimal-, oder Hexadezimalsystem dar.
+
+\end{tcolorbox}
+
+Der IEEE 754-Standard für eine Zahl \(z\) in Gleitkommadarstellung legt
+die Größe der einzelnen Komponenten dieser Darstellung fest und hat
+folgendes Format (das erste Bit ist hierbei das Vorzeichen der Mantisse
+\(m\)):
+
+32-Bit-IEEE 754-Gleitkommazahlen:
+
+\includegraphics[width=3.125in,height=\textheight,keepaspectratio]{images/floatdarstellung.jpg}
+
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-tip-color!10!white, toprule=.15mm, rightrule=.15mm, opacityback=0, bottomrule=.15mm, titlerule=0mm, leftrule=.75mm, left=2mm, coltitle=black, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Info}, arc=.35mm, breakable, colback=white]
+
+IEEE ist die Abkürzung für ``\textbf{I}nstitute of \textbf{E}lectrical
+and \textbf{E}lectronics \textbf{Engineers}'', eine Organisation, die
+Standards für verschiedene Technologien entwickelt und pflegt.
+
+\end{tcolorbox}
+
+Bei der Darstellung der Zahlen im Rechner reserviert man einen festen
+Teil einer Folge von Speicherzellen (1-Bit Speichern) für die Mantisse
+und den Rest für den Exponenten (den Wert von \(b\) braucht man nicht zu
+speichern, da alle Rechnungen mit demselben Wert von \(b\) durchgeführt
+werden).
+
+\textbf{Beispiel:}
+
+Sei \(b = 2\) und hat man insgesamt 32 Bit zur Verfügung
+
+26 Bit werden für die Mantisse (incl.~Vorzeichen) und 6 Bit für den
+Exponenten (incl.~Vorzeichen) 3 Bit verwendet. Das erste Bit
+kennzeichnet jeweils das Vorzeichen; dabei kann man insbesondere für den
+Exponenten auch die 2-Komplementdarstellung benutzen. Die rechnerinterne
+Darstellung der Zahl 12,25 würde dann wie folgt aussehen:
+
+\includegraphics[width=3.125in,height=\textheight,keepaspectratio]{images/beispiel.jpg}
+
+\textbf{Thema zum Weiterdenken:} Die Gleitkommadarstellung ist nicht
+eindeutig. Die Zahle 12,26 läst sich auf zum Beispiel diese Arten
+darstellen.
+
+\begin{itemize}
+\tightlist
+\item
+  \(1100,01\cdot 2^0\)
+\item
+  \(110,001\cdot 2^1\)
+\item
+  \(11,0001\cdot 2^2\)
+\item
+  usw.
+\end{itemize}
+
+Daher wird in der Informatik die \textbf{normierte
+Gleitkommadarstellung} verwendet, bei der die Mantisse immer mit einer 1
+beginnt (außer bei der Zahl 0). Dadurch wird die Darstellung eindeutig
+und es gibt keine Mehrdeutigkeiten mehr. Informiere dich über die
+normierte Gleitkommadarstellung.
+
+\begin{tcolorbox}[enhanced jigsaw, toptitle=1mm, colbacktitle=quarto-callout-important-color!10!white, toprule=.15mm, rightrule=.15mm, opacityback=0, bottomrule=.15mm, titlerule=0mm, leftrule=.75mm, left=2mm, coltitle=black, colframe=quarto-callout-important-color-frame, bottomtitle=1mm, opacitybacktitle=0.6, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Folgerung}, arc=.35mm, breakable, colback=white]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Es sind auf diese Weise nur endlich viele reelle Zahlen darstellbar.
+\item
+  Es gibt jeweils eine kleinste und eine größte darstellbare Zahl.
+\item
+  Es gibt ein endliches Intevall um den Nullpunkt, in dem keine
+  darstellbare Zahl liegt.
+\item
+  Ein analoges Intervall gibt es selbstverständlich um andere Zahlen.
+\end{enumerate}
+
+\end{tcolorbox}
+
+
+
+
+\end{document}
